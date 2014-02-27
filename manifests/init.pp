@@ -1,5 +1,5 @@
 class dovecot {
-  package { 'dovecot-imapd':
+  package { 'dovecot':
     ensure => installed,
     alias  => 'dovecot',
     before => Exec['dovecot']
