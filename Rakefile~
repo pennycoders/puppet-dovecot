@@ -1,0 +1,31 @@
+require 'rubygems'
+require 'bundler/setup'
+
+Bundler.require :default
+
+
+require 'puppetlabs_spec_helper/rake_tasks'
+require 'rspec-system/rake_task'
+require 'puppet-lint/tasks/puppet-lint'
+#require 'simplecov-rcov'
+require 'rcov/rcovtask' 
+    
+
+
+# lib/r.rb
+Rcov::FileStatistics.class_eval do
+  def initialize_with_encoding(_, lines, *params)
+    lines.each{|l| l.force_encoding("BINARY")}
+    initialize_without_encoding(_, lines, *params)
+  end
+  alias_method(:initialize_without_encoding, :initialize)
+  alias_method(:initialize, :initialize_with_encoding)
+end
+
+PuppetLint.configuration.send("disable_80chars")
+PuppetLint.configuration.ignore_paths = ["pkg/**/*.pp"]
+task :default do
+          puts "\n\nTo run the Tests on Debian you need to install the augeas files!\n\n"
+	  
+	  sh %{rake spec lint}
+end
