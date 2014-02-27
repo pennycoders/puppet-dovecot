@@ -1,5 +1,5 @@
 name    'pennycoders-dovecot'
-version '0.0.6'
+version '0.0.7'
 source 'https://github.com/pennycoders/dovecot.git'
 author 'pennycoders'
 license 'Apache License 2.0'

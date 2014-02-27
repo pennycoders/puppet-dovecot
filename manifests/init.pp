@@ -7,7 +7,11 @@ class dovecot {
 
   exec { 'dovecot':
     command     => 'echo "dovecot packages are installed"',
-    path        => '/usr/sbin:/bin:/usr/bin:/sbin',
+    path        => [
+      '/usr/sbin',
+      '/bin',
+      '/usr/bin',
+      '/sbin'],
     logoutput   => true,
     refreshonly => true,
   }
@@ -17,3 +21,4 @@ class dovecot {
     require => Exec['dovecot'],
   }
 }
+
